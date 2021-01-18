@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Joueurs index{% endblock %}
+
+{% block body %}
+    <h1>Joueurs index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomJoueur</th>
+                <th>PrenomJoueur</th>
+                <th>PhotoJoueur</th>
+                <th>DateNaissance</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for joueur in joueurs %}
+            <tr>
+                <td>{{ joueur.id }}</td>
+                <td>{{ joueur.nomJoueur }}</td>
+                <td>{{ joueur.prenomJoueur }}</td>
+                <td>{{ joueur.photoJoueur }}</td>
+                <td>{{ joueur.dateNaissance ? joueur.dateNaissance|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('joueurs_show', {'id': joueur.id}) }}">show</a>
+                    <a href="{{ path('joueurs_edit', {'id': joueur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('joueurs_new') }}">Create new</a>
+{% endblock %}

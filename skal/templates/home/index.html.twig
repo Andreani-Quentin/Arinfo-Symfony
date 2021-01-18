@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<h1>Bienvenue sur Skål !</h1>
+
+<section class="mt-5">
+	{% for bar in bar %}
+	<a style="text-decoration: none; color: black; " href="{{ path('bar_show', {'id': bar.id}) }}">
+		<div class="row mt-5">
+			{% for image in bar.images %}
+			<div class="col-md-2 text-center">
+				<img src="{{ asset('/uploads/' ~ image.name) }}" alt="" width="150">
+			</div>
+			{% endfor %}
+			<div class="col-md-8">
+				<h2>{{ bar.name }}</h2>
+				<p>Avis : {{ review|length }}</p>
+				<p>{{ bar.adress }}, {{ bar.city.name }}</p>
+				<p>{{ bar.description }}</p>
+			</div>
+			<div class="col-md-2 text-center">
+				<h1>8,5</h1>
+			</div>
+		</div>
+	</a>
+	{% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+    	<title>Skål || Évaluez votre bar</title>
+    	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    	<!-- Styles -->
+
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    	<link rel="stylesheet" href="styles/style.css">
+
+    	<!-- Îcones -->
+
+    	<script src="https://kit.fontawesome.com/50b4ed0339.js" crossorigin="anonymous"></script>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body class="container mt-5 pt-5">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container">
+            <a class="navbar-brand" href="#">Skål</a>
+            <form class="form-inline ml-auto">
+                <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
+                <button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link " href="/">Accueil</a></li>
+                {% if app.user %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">Mon Compte</a>
+                    <div class="dropdown-menu mt-2" style="margin-left: -40px;">
+                        <a class="dropdown-item" href="#">Voir Profil</a>
+                        <a class="dropdown-item" href="bar/new">Ajouter mon Bar</a>
+                        <a class="dropdown-item" href="/logout">Déconnexion</a>
+                    </div>
+                </li>
+                {% endif %}
+                {% if not app.user %}
+                <li class="nav-item"><a class="nav-link " href="/login">Connexion</a></li>
+                {% endif %}
+            </ul>
+            </div>
+        </nav>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+                <!--============================= SCRYPT =============================-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </body>
+    	<script src="https://kit.fontawesome.com/50b4ed0339.js" crossorigin="anonymous"></script>
+</html>

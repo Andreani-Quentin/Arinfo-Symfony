@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ClassesController!{% endblock %}
+
+{% block body %}
+	
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+	<div class="text-center">
+		<h1>Gestion de L'école</h1>
+	</div>
+
+	<h2>Les Classes</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom_classe</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for class in classes %}
+            <tr>
+                <td>{{ class.id }}</td>
+                <td>{{ class.nomClasse }}</td>
+                <td>
+                    <a href="{{ path('classes_show', {'id': class.id}) }}">show</a>
+                    <a href="{{ path('classes_edit', {'id': class.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-right">
+        <a href="{{ path('classes_new') }}">Ajouter une classe</a>
+    </div>
+
+    <h2>Les Professeurs</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom_professeur</th>
+                <th>Prenom_professeur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for proffesseur in proffesseurs %}
+            <tr>
+                <td>{{ proffesseur.id }}</td>
+                <td>{{ proffesseur.nomProfesseur }}</td>
+                <td>{{ proffesseur.prenomProfesseur }}</td>
+                <td>
+                    <a href="{{ path('proffesseur_show', {'id': proffesseur.id}) }}">show</a>
+                    <a href="{{ path('proffesseur_edit', {'id': proffesseur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-right">
+        <a href="{{ path('proffesseur_new') }}">Ajouter un Professeur</a>
+    </div>
+
+    <h2>Les Élèves</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom_eleve</th>
+                <th>Prenom_eleve</th>
+                <th>Classe_eleve</th>
+                <th>Date_naissance_eleve</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for elefe in eleves %}
+            <tr>
+                <td>{{ elefe.id }}</td>
+                <td>{{ elefe.nomEleve }}</td>
+                <td>{{ elefe.prenomEleve }}</td>
+                <td>{{ elefe.classeEleve }}</td>
+                <td>{{ elefe.dateNaissanceEleve ? elefe.dateNaissanceEleve|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('eleves_show', {'id': elefe.id}) }}">show</a>
+                    <a href="{{ path('eleves_edit', {'id': elefe.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-right">
+        <a href="{{ path('eleves_new') }}">Ajouter un élève</a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bar index{% endblock %}
+
+{% block body %}
+    <h1>Bar index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Adress</th>
+                <th>City</th>
+                <th>Created_at</th>
+                <th>User</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bar in bars %}
+            <tr>
+                <td>{{ bar.id }}</td>
+                <td>{{ bar.name }}</td>
+                <td>{{ bar.description }}</td>
+                <td>{{ bar.adress }}</td>
+                <td>{{ bar.city.name }}</td>
+                <td>{{ bar.createdAt ? bar.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ bar.user.firstname }}</td>
+                <td>
+                    <a href="{{ path('bar_show', {'bar': bar.id}) }}">show</a>
+                    <a href="{{ path('bar_edit', {'id': bar.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bar_new') }}">Create new</a>
+{% endblock %}

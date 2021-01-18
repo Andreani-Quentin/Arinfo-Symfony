@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+	<h2>Les Clubs</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomClub</th>
+                <th>SportClub</th>
+                <th>AdresseClub</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for club in club %}
+            <tr>
+                <td>{{ club.id }}</td>
+                <td>{{ club.nomClub }}</td>
+                <td>{{ club.sportClub }}</td>
+                <td>{{ club.adresseClub }}</td>
+                <td>
+                    <a href="{{ path('club_show', {'id': club.id}) }}">Voir</a>
+                    <a href="{{ path('club_edit', {'id': club.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-right">
+    	<a href="{{ path('club_new') }}">Ajouter une équipe</a>
+    </div>
+
+    <h2>Les Équipes</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom Equipe</th>
+                <th>Nom Club</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for equipe in equipes %}
+            <tr>
+                <td>{{ equipe.id }}</td>
+                <td>{{ equipe.nomEquipe }}</td>
+                <td>{{ equipe.clubEquipe.nomClub }}</td>
+                <td>
+                    <a href="{{ path('equipes_show', {'id': equipe.id}) }}">Voir</a>
+                    <a href="{{ path('equipes_edit', {'id': equipe.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-right">
+    	<a href="{{ path('equipes_new') }}">Ajouter une équipe</a>
+    </div>
+
+    <h2>Les Joueurs</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomJoueur</th>
+                <th>PrenomJoueur</th>
+                <th>PhotoJoueur</th>
+                <th>DateNaissance</th>
+                <th>Club Joueur</th>
+                <th>Equipe Joueur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for joueur in joueurs %}
+            <tr>
+                <td>{{ joueur.id }}</td>
+                <td>{{ joueur.nomJoueur }}</td>
+                <td>{{ joueur.prenomJoueur }}</td>
+                <td><img src="{{ asset('uploads/photos/' ~ joueur.photoJoueur) }}" width="100"></td>
+                <td>{{ joueur.dateNaissance ? joueur.dateNaissance|date('d-m-Y') : '' }}</td>
+                <td>{{ joueur.clubJoueur.nomClub }}</td>
+                <td>{{ joueur.equipeJoueur.nomEquipe }}</td>
+                <td>
+                    <a href="{{ path('joueurs_show', {'id': joueur.id}) }}">Voir</a>
+                    <a href="{{ path('joueurs_edit', {'id': joueur.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-right">
+    	<a href="{{ path('joueurs_new') }}">Ajouter un joueur</a>
+    </div>
+
+{% endblock %}
